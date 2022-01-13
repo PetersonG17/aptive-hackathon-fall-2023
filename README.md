@@ -1,8 +1,8 @@
 ### Project Setup ###
-1- Copy the contents of the .env.example file into a new .env file in the root of the project directory and make any changes to ENV variables that are needed (It should work with the default values)
-2- Run "docker-compose build" to build the docker images
-3- Run "docker-compose up" to spin up the docker containers
-4- Execute any artisan, composer, or other commands inside the docker container by opening the container terminal with this command: "docker-compose exec laravel-docker-php bash"
+1. Copy the contents of the .env.example file into a new .env file in the root of the project directory and make any changes to ENV variables that are needed (It should work with the default values)
+2. Run "docker-compose build" to build the docker images
+3. Run "docker-compose up" to spin up the docker containers
+4. Execute any artisan, composer, or other commands inside the docker container by opening the container terminal with this command: "docker-compose exec laravel-docker-php bash"
 
 ### Notes ###
 - Artisan, Composer, and NPM commands should be executed from within the container
