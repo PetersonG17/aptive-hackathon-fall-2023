@@ -1,0 +1,63 @@
+version: "3.8"
+
+networks:
+    network:
+
+volumes:
+    mysql:
+    node_modules:
+    vendor:
+
+services:
+
+    laravel-docker-nginx:
+        image: nginx:stable-alpine
+        container_name: laravel-docker-nginx
+        ports:
+            - "8080:80"
+        volumes:
+            - ./:/var/www/app
+            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - laravel-docker-php
+            - laravel-docker-mysql
+        networks:
+            - network
+
+    laravel-docker-mysql:
+        image: mysql:8.0
+        container_name: laravel-docker-mysql
+        restart: unless-stopped
+        tty: true
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_DATABASE: laravel-dockerdb
+            MYSQL_ROOT_PASSWORD: secret
+        command: "--log-bin-trust-function-creators=1"
+        volumes:
+            - mysql:/var/lib/mysql
+        networks:
+            - network
+        cap_add:
+            - SYS_NICE  # CAP_SYS_NICE
+
+    laravel-docker-php:
+        build:
+            context: .
+            dockerfile: ./docker/php/Dockerfile
+        image: laravel-docker-php
+        container_name: laravel-docker-php
+        tty: true
+        working_dir: /var/www/app
+        volumes:
+            - ./:/var/www/app
+            - vendor:/var/www/app/vendor
+            - node_modules:/var/www/app/node_modules
+        #command: /bin/sh -C "./entrypoint.dev.sh"
+        depends_on:
+            - laravel-docker-mysql
+        expose:
+            - 9000
+        networks:
+            - network
