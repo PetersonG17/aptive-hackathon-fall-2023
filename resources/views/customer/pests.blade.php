@@ -38,7 +38,7 @@
                                     <div class="input-group-append">
                                         <span class="input-group-text">Location</span>
                                     </div>
-                                    <input type="text" class="form-control" name="pests[]" placeholder="Location" value="{{ $pest['location'] }}">
+                                    <input type="text" class="form-control" name="locations[]" placeholder="Location" value="{{ $pest['location'] }}">
                                 </div>
                             </div>
                         </div>

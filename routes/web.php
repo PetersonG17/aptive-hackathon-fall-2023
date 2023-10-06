@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerProfileController;
 use App\Http\Controllers\CustomerPestsController;
 use App\Http\Controllers\CustomerNoteController;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +22,4 @@ Route::get('/', function () {
 
 Route::post('/customer-notes', [CustomerNoteController::class, 'submit'])->name('note.submit');
 Route::post('/customer-pests', [CustomerPestsController::class, 'submit'])->name('pests.submit');
+Route::get('/customer-profile', [CustomerProfileController::class, 'view'])->name('customer.profile');
