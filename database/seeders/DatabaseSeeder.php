@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
 
         Appointment::factory()->count(5)->create(
             [
-                'customer_id' => $customer->id
+                'customer_id' => $customer->id,
             ]
         );
     }

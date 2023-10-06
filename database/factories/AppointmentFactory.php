@@ -16,6 +16,27 @@ class AppointmentFactory extends Factory
      */
     protected $model = Appointment::class;
 
+    const PESTS = [
+        'wasps',
+        'ants',
+        'termites',
+        'flies',
+        'roaches',
+        'spiders'
+    ];
+
+    const LOCATIONS = [
+        'backyard',
+        'porch',
+        'bedroom',
+        'kitchen',
+        'playset',
+        'basement',
+        'shed',
+        'yard',
+        'deck'
+    ];
+
     /**
      * Define the model's default state.
      *
@@ -25,14 +46,26 @@ class AppointmentFactory extends Factory
     {
         return [
             'customer_id' => Customer::all()->random(1),
-            'scheduled_for' => $this->faker->date(),
+            'scheduled_for' => $this->faker->dateTimeThisYear(),
             'note' => "I am having problems with ants on my front porch and wasps nests on my playset in the back yard. My kitchen is also being eaten by termites and my mother in law brought bedbugs into the bedrooms my house.",
-            'pests' => [
-                ["pest" => "wasp", "location" => "playset"],
-                ["pest" => "ants", "location" => "front porch"],
-                ["pest" => "termites", "location" => "kitchen"],
-                ["pest" => "bedbugs", "location" => "bedrooms"],
-            ],
+            'pests' => $this->generateRandomPestsArray()
         ];
+    }
+
+    private function generateRandomPestsArray(): array
+    {
+        $pests = [];
+
+        for($i = 0; $i < rand(1, 7); $i++) {
+            $pestKey = array_rand(self::PESTS, 1);
+            $locationKey = array_rand(self::LOCATIONS, 1);
+
+            $pests[] = [
+                'pest' => self::PESTS[$pestKey],
+                'location' => self::LOCATIONS[$locationKey]
+            ];
+        }
+
+        return $pests;
     }
 }

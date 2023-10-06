@@ -18,12 +18,6 @@
 
     </head>
 
-    @php
-        // Sort the appointments so the most recent is first
-        $appointments = $appointments->sortBy('id'); // TODO: should sort by date when we have real dates
-        $firstAppointment = $appointments->first();
-    @endphp
-
     <body class="antialiased vh-100 d-flex align-items-center justify-content-center vh-100">
         <div class="container">
             <div class="card">
@@ -44,7 +38,7 @@
                     <div class="row mt-3 mb-4">
                         <div class="col">
                             <h5>Most Recent Appointment</h5>
-                            <p class="mb-1">{{ $firstAppointment->scheduled_for->toFormattedDayDateString() }}</p>
+                            <p class="mb-1">{{ $appointments->first()->scheduled_for->toFormattedDayDateString() }}</p>
                             <table class="table table-hover mb-2">
                                 <thead>
                                   <tr>
@@ -54,7 +48,7 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ( $firstAppointment->pests as $pest)
+                                    @foreach ( $appointments->first()->pests as $pest)
                                         <tr>
                                             <th scope="row"><i class="fa-regular fa-circle-check text-success"></i></th>
                                             <td>{{ $pest['pest'] }}</td>
