@@ -11,9 +11,7 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
-
-        <!-- Chart JS -->
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart JS -->
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -33,7 +31,7 @@
                     <h3 class="m-0 text-muted">{{ $customer->id }}</h3>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-6">
                     <canvas id="pests"></canvas>
                 </div>
@@ -46,25 +44,38 @@
 
     {{-- Scripts for the charts --}}
     <script>
-        const ctx = document.getElementById('pests');
+        // Pest Chart
+        const ctx_1 = document.getElementById('pests');
 
-        new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-              label: '# of Votes',
-              data: [12, 19, 3, 5, 2, 3],
-              borderWidth: 1
-            }]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true
-              }
+        new Chart(ctx_1, {
+            type: 'doughnut',
+            data: {
+                labels: {!! json_encode(array_keys($chartData['pestCounts'])) !!},
+                datasets: [
+                    {
+                        label: 'Pests',
+                        data: {!! json_encode(array_values($chartData['pestCounts'])) !!},
+                        hoverOffset: 4
+                    }
+                ]
             }
-          }
+        });
+
+        // Location Chart
+        const ctx_2 = document.getElementById('locations');
+
+        new Chart(ctx_2, {
+            type: 'doughnut',
+            data: {
+                labels: {!! json_encode(array_keys($chartData['locationCounts'])) !!},
+                datasets: [
+                    {
+                        label: 'Locations',
+                        data: {!! json_encode(array_values($chartData['locationCounts'])) !!},
+                        hoverOffset: 4
+                    }
+                ]
+            }
         });
       </script>
 </html>

@@ -18,9 +18,33 @@ class CustomerProfileController extends Controller
 
         $appointments = Appointment::where('customer_id', 1)->get();
 
+        // summarize all the pest information for the profile
+        $pestCounts = [];
+        $locationCounts = [];
+        foreach ($appointments as $appointment) {
+            foreach ($appointment->pests as $pest) {
+
+                if(isset($pestCounts[$pest['pest']])) {
+                    $pestCounts[$pest['pest']] += 1;
+                } else {
+                    $pestCounts[$pest['pest']] = 1;
+                }
+
+                if(isset($locationCounts[$pest['location']])) {
+                    $locationCounts[$pest['location']] += 1;
+                } else {
+                    $locationCounts[$pest['location']] = 1;
+                }
+            }
+        }
+
         return view('customer.profile', [
             'customer' => $customer,
-            'appointments' => $appointments
+            'appointments' => $appointments,
+            'chartData' => [
+                'pestCounts' => $pestCounts,
+                'locationCounts' => $locationCounts
+            ]
         ]);
     }
 }
