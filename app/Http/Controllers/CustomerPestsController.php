@@ -10,29 +10,37 @@ class CustomerPestsController extends Controller
 {
     public function submit(Request $request)
     {
-        $pests = $request->input('pests');
-        $locations = $request->input('locations');
-        $notes = $request->input("notes");
+        // $pests = $request->input('pests');
+        // $locations = $request->input('locations');
+        // $notes = $request->input("notes");
 
-        $pestsAndLocations = [];
+        // $pestsAndLocations = [];
 
-        // TODO: Send data to MySQL DB
+        // // TODO: Send data to MySQL DB
 
-        foreach($pests as $index => $pest) {
-            $pestsAndLocations[] = ['name' => $pest, 'location' => $locations[$index]];
-        }
+        // foreach($pests as $index => $pest) {
+        //     $pestsAndLocations[] = ['name' => $pest, 'location' => $locations[$index]];
+        // }
 
-        $appointment = new Appointment([
-            'customer_id' => 1,
-            'scheduled_for' => Carbon::now()->addHours(5),
-            'pests' => json_encode($pestsAndLocations),
-            'note' => $notes
-        ]);
+        // $appointment = new Appointment([
+        //     'customer_id' => 1,
+        //     'scheduled_for' => Carbon::now()->addHours(5),
+        //     'pests' => json_encode($pestsAndLocations),
+        //     'note' => $notes
+        // ]);
 
-        $appointment->save();
-        
+        // $appointment->save();
+
         // TODO: Send data to influxDB
 
-        return view('customer.confirm');
+        // TODO: Send dynamic array of pests to the confirmation page for the appointment
+        return view('customer.confirm', [
+            'pests' => [
+                ["pest" => "wasp", "location" => "playset"],
+                ["pest" => "ants", "location" => "front porch"],
+                ["pest" => "termites", "location" => "kitchen"],
+                ["pest" => "bedbugs", "location" => "bedrooms"],
+            ],
+        ]);
     }
 }
