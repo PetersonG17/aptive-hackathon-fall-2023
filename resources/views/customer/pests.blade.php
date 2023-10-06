@@ -17,53 +17,74 @@
 
     </head>
     <body class="antialiased d-flex align-items-center justify-content-center vh-100">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">You are having problems with these pests in these locations. Is this correct?</h5>
-                <p class="card-text">Please confirm that we have summarized your pest issues correctly.</p>
-                <form action="{{ route('pests.submit') }}" method="POST" id='pest-form'>
-                    @csrf <!-- {{ csrf_field() }} -->
-                    <input type="hidden" name="notes" value="{{$data['notes']}}">
-                    @foreach ( $data['pests'] as $pest )
-                        <div class="row mb-1" @if($loop->first) id='row-template' @elseif($loop->last) id='last-row' @endif data-row-index="{{$loop->index}}">
-                            <div class="col">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text h-100">
-                                            <i class="fa-solid fa-bug"></i>
-                                        </span>
-                                    </div>
-                                    <input type="text" class="form-control" name="pest-{{$loop->index}}" placeholder="Pest" value="{{ $pest['name'] }}">
-                                  </div>
-                            </div>
-                            <div class="col">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text h-100">
-                                            <i class="fa-solid fa-house"></i>
-                                        </span>
-                                    </div>
-                                    <input type="text" class="form-control" name="location-{{$loop->index}}" placeholder="Location" value="{{ $pest['location'] }}">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-check">
-                                    <label class="form-check-label" for="isRecurring">Is this a recurring issue?</label>
-                                    <input class="form-check-input" type="checkbox" name="recurring-{{$loop->index}}" id="isRecurring">
-                                  </div>
-                            </div>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Based on what you told us...</h5>
                         </div>
-                    @endforeach
-                    <div class="row">
-                        <div class="col-12 d-flex align-items-center justify-content-start">
-                            <button type="button" id='add-row-button' class="btn btn-light"><i class="fa-solid fa-plus"></i></button>
+                        <div class="card-body">
+                            <p class="card-text">{{ $data['notes'] }}</p>
                         </div>
                     </div>
-                    <div class="p-1"></div>
-                    <button type="submit" class="btn btn-primary mb-2 mt-1">Confirm</button>
-                </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">You are having problems with these pests in these locations. Is this correct?</h5>
+                            <p class="card-text">Please confirm that we have summarized your pest issues correctly.</p>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('pests.submit') }}" method="POST" id='pest-form'>
+                                @csrf <!-- {{ csrf_field() }} -->
+                                @foreach ( $data['pests'] as $pest )
+                                    <div class="row mb-1" @if($loop->first) id='row-template' @elseif($loop->last) id='last-row' @endif data-row-index="{{$loop->index}}">
+                                        <div class="col">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text h-100">
+                                                        <i class="fa-solid fa-bug"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" name="pest-{{$loop->index}}" placeholder="Pest" value="{{ $pest['name'] }}" required>
+                                              </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text h-100">
+                                                        <i class="fa-solid fa-house"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" name="location-{{$loop->index}}" placeholder="Location" value="{{ $pest['location'] }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <label class="form-check-label" for="isRecurring">Is this a recurring issue?</label>
+                                                <input class="form-check-input" type="checkbox" name="recurring-{{$loop->index}}" id="isRecurring">
+                                              </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                <div class="row">
+                                    <div class="col-12 d-flex align-items-center justify-content-start">
+                                        <button type="button" id='add-row-button' class="btn btn-light"><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="p-1"></div>
+                                <button type="submit" class="btn btn-primary mb-2 mt-1">Confirm</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+
     </body>
 
     <script>
