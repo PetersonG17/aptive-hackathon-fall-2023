@@ -10,17 +10,9 @@ class CustomerPestsController extends Controller
 {
     public function submit(Request $request)
     {
-        $pests = $request->input('pests');
-        $locations = $request->input('locations');
         $notes = $request->input("notes");
 
-        $pestsAndLocations = [];
-
-        // TODO: Send data to MySQL DB
-
-        foreach($pests as $index => $pest) {
-            $pestsAndLocations[] = ['name' => $pest, 'location' => $locations[$index]];
-        }
+        $pestsAndLocations = $this->parseJohnsNonesenseIntoUsableArray($request);
 
         $appointment = new Appointment([
             'customer_id' => 1,
@@ -30,9 +22,39 @@ class CustomerPestsController extends Controller
         ]);
 
         $appointment->save();
+
+        dd($pestsAndLocations);
         
         // TODO: Send data to influxDB
 
         return view('customer.confirm');
+    }
+
+    private function parseJohnsNonesenseIntoUsableArray(Request $request): array
+    {
+        $usableArray = [];
+
+        $row = $this->parseSingleNonsenseRow($request, 0);
+
+        while($row !== null) {
+            $usableArray[] = $row;
+            $row = $this->parseSingleNonsenseRow($request, 0);
+        }
+
+        return $usableArray;
+    }
+    
+
+    private function parseSingleNonsenseRow(Request $request, int $index)
+    {
+        $location = $request->input('location-'.$index);
+        $pest = $request->input('pest-'.$index);
+        $reoccurring = $request->input('recurring-'.$index, false);
+
+        if($location === null && $pest === null){
+            return null;
+        }
+
+        return ['pest' => $pest, 'location' => $location, 'reoccuring' => $reoccurring];
     }
 }

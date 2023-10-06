@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class CustomerNoteController extends Controller
 {
@@ -27,7 +28,7 @@ class CustomerNoteController extends Controller
             "messages" => [
                 [
                     "role" => "system",
-                    "content" => "You will be provided with unstructured data, and your task is to parse mentioned pests and their location into JSON"
+                    "content" => "You will be provided with unstructured data, and your task is to parse pest names and their location into JSON"
                 ],
                 [
                     "role" => "user",
@@ -44,6 +45,7 @@ class CustomerNoteController extends Controller
         $response = Http::withToken($authkey)
             ->accept('application/json')
             ->post($url, $requestData);
+        Log::info(json_decode($response->json()["choices"][0]["message"]["content"], true));
         return json_decode($response->json()["choices"][0]["message"]["content"], true);
     }
 }
