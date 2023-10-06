@@ -21,12 +21,13 @@
             <div class="card-body">
                 <h5 class="card-title">Can you tell us more about it?</h5>
                 <p class="card-text">Please tell us what pests you're seeing and where our service pros should look for them.</p>
-                <form>
+                <form action="{{ route('note.submit') }}" method="post">
+                    @csrf <!-- {{ csrf_field() }} -->
                     <div class="form-group">
                         <textarea class="form-control" id="customerNotes" placeholder="I have been having issues with ants in my kitchen. etc..." rows="10"></textarea>
                     </div>
                     <div class="p-1"></div>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <button type="submit" class="btn btn-primary mb-2">Submit</button>
                 </form>
             </div>
         </div>

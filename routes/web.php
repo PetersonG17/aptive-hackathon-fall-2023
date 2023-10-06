@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerNoteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('customer_note');
 });
+
+Route::post('/customer-notes', [CustomerNoteController::class, 'submit'])->name('note.submit');
