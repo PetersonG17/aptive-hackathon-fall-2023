@@ -11,6 +11,7 @@ services:
     laravel-docker-nginx:
         image: nginx:stable-alpine
         container_name: laravel-docker-nginx
+        platform: linux/amd64
         ports:
             - "8080:80"
         volumes:
@@ -25,6 +26,7 @@ services:
     laravel-docker-mysql:
         image: mysql:8.0
         container_name: laravel-docker-mysql
+        platform: linux/amd64
         restart: unless-stopped
         tty: true
         ports:
@@ -45,6 +47,7 @@ services:
             context: .
             dockerfile: ./docker/php/Dockerfile
         image: laravel-docker-php
+        platform: linux/amd64
         container_name: laravel-docker-php
         tty: true
         working_dir: /var/www/app
