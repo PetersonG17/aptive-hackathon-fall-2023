@@ -16,37 +16,19 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     </head>
-    <body class="antialiased">
-        <!-- TODO: Add customer note form here -->
-        <form>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Email address</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    <body class="antialiased d-flex align-items-center justify-content-center">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Can you tell us more about it?</h5>
+                <p class="card-text">Please tell us what pests you're seeing and where our service pros should look for them.</p>
+                <form>
+                    <div class="form-group">
+                        <textarea class="form-control" id="customerNotes" placeholder="I have been having issues with ants in my kitchen. etc..." rows="10"></textarea>
+                    </div>
+                    <div class="p-1"></div>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Example select</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect2">Example multiple select</label>
-                <select multiple class="form-control" id="exampleFormControlSelect2">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Example textarea</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-        </form>
+        </div>
     </body>
 </html>
