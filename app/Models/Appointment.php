@@ -40,4 +40,8 @@ class Appointment extends Model
     protected $casts = [
         'pests' => 'array',
     ];
+
+    protected $dates = [
+        'scheduled_for'
+    ];
 }
