@@ -30,7 +30,7 @@
                                     <div class="input-group-append">
                                         <span class="input-group-text">Pest</span>
                                     </div>
-                                    <input type="text" class="form-control" name="pests[]" placeholder="Pest" value="{{ $pest['pest'] }}">
+                                    <input type="text" class="form-control" name="pests[]" placeholder="Pest" value="{{ $pest['name'] }}">
                                   </div>
                             </div>
                             <div class="col">
