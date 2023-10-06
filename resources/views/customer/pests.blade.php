@@ -26,10 +26,20 @@
                     @foreach ( $data['pests'] as $pest )
                         <div class="row mb-1">
                             <div class="col">
-                                <input type="text" class="form-control" name="pests[]" placeholder="Pest" value="{{ $pest['pest'] }}">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Pest</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="pests[]" placeholder="Pest" value="{{ $pest['pest'] }}">
+                                  </div>
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" name="pests[]" placeholder="Location" value="{{ $pest['location'] }}">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Location</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="pests[]" placeholder="Location" value="{{ $pest['location'] }}">
+                                </div>
                             </div>
                         </div>
                     @endforeach
