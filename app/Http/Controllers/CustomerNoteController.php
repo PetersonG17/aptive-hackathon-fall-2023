@@ -12,7 +12,7 @@ class CustomerNoteController extends Controller
         $notes = $request->input('notes');
 
         $parsedData = $this->submitToAI($notes);
-        $parsedData["note"] = $notes;
+        $parsedData["notes"] = $notes;
 
         return view('customer.pests', ['data' => $parsedData]);
     }

@@ -27,7 +27,7 @@ class Appointment extends Model
     /**
      * Get the post that owns the comment.
      */
-    public function post(): BelongsTo
+    public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
     }
