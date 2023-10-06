@@ -17,7 +17,7 @@ class CustomerPestsController extends Controller
         $appointment = new Appointment([
             'customer_id' => 1,
             'scheduled_for' => Carbon::now()->addHours(5),
-            'pests' => json_encode($pestsAndLocations),
+            'pests' => $pestsAndLocations,
             'note' => $notes
         ]);
 
@@ -42,7 +42,7 @@ class CustomerPestsController extends Controller
 
         return $usableArray;
     }
-    
+
 
     private function parseSingleNonsenseRow(Request $request, int $index)
     {

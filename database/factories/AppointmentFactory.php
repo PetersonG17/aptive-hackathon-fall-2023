@@ -62,7 +62,8 @@ class AppointmentFactory extends Factory
 
             $pests[] = [
                 'pest' => self::PESTS[$pestKey],
-                'location' => self::LOCATIONS[$locationKey]
+                'location' => self::LOCATIONS[$locationKey],
+                'recurring' => boolval(rand(0, 1))
             ];
         }
 

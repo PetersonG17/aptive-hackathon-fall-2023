@@ -10,17 +10,17 @@ class CustomerNoteController extends Controller
 {
     public function submit(Request $request)
     {
-        $notes = $request->input('notes');
+        $notes = $request->input("notes");
 
         $parsedData = $this->submitToAI($notes);
         $parsedData["notes"] = $notes;
 
-        return view('customer.pests', ['data' => $parsedData]);
+        return view("customer.pests", ["data" => $parsedData]);
     }
 
     private function submitToAI(string $notes): array
     {
-        $authkey = env('OPEN_AI_API_KEY');
+        $authkey = env("OPEN_AI_API_KEY");
         $url = "https://api.openai.com/v1/chat/completions";
 
         $requestData = [
@@ -28,7 +28,7 @@ class CustomerNoteController extends Controller
             "messages" => [
                 [
                     "role" => "system",
-                    "content" => "You will be provided with unstructured data, and your task is to parse pest names and their location into JSON"
+                    "content" => 'You will be provided with unstructured data, and your task is to parse pest names and their location into JSON. Please ensure that your response is structured in the example JSON format shown for each pest and its associated location. If any pest or does not have an associated location pairing (or vice versa) then set the value of the key for that entry in the JSON respons to null. Example JSON output format: {"pests": [{"name": "spider", "location": "kitchen"}, {"name": "ants", "location": "front porch"}]}. Example JSON output format with missing pest location pairings: {"pests": [{"name": "spider", "location": null}, {"name": null, "location": "front porch"}]}'
                 ],
                 [
                     "role" => "user",
@@ -43,9 +43,9 @@ class CustomerNoteController extends Controller
         ];
 
         $response = Http::withToken($authkey)
-            ->accept('application/json')
+            ->accept("application/json")
             ->post($url, $requestData);
-        Log::info(json_decode($response->json()["choices"][0]["message"]["content"], true));
+        Log::info($response);
         return json_decode($response->json()["choices"][0]["message"]["content"], true);
     }
 }

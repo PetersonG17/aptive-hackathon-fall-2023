@@ -40,6 +40,7 @@
                         <div class="card-body">
                             <form action="{{ route('pests.submit') }}" method="POST" id='pest-form'>
                                 @csrf <!-- {{ csrf_field() }} -->
+                                <input type="hidden" name="notes" value="{{ $data['notes'] }}">
                                 @foreach ( $data['pests'] as $pest )
                                     <div class="row mb-1" @if($loop->first) id='row-template' @elseif($loop->last) id='last-row' @endif data-row-index="{{$loop->index}}">
                                         <div class="col">
