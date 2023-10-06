@@ -16,11 +16,11 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     </head>
-    <body class="antialiased d-flex align-items-center justify-content-center">
+    <body class="antialiased d-flex align-items-center justify-content-center vh-100">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Can you tell us more about it?</h5>
-                <p class="card-text">Please tell us what pests you're seeing and where our service pros should look for them.</p>
+                <h5 class="card-title">You are having problems with these pests in these locations. Is this correct?</h5>
+                <p class="card-text">Please confirm that we have summarized your pest issues correctly.</p>
                 <form action="{{ route('pests.submit') }}" method="POST">
                     @csrf <!-- {{ csrf_field() }} -->
                     @foreach ( $data['pests'] as $pest )
