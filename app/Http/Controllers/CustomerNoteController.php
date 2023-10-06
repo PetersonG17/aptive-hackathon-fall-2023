@@ -19,7 +19,7 @@ class CustomerNoteController extends Controller
 
     private function submitToAI(string $notes): array
     {
-        $authkey = "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";
+        $authkey = env('OPEN_AI_API_KEY');
         $url = "https://api.openai.com/v1/chat/completions";
 
         $requestData = [
