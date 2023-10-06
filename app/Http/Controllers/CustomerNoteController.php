@@ -15,7 +15,6 @@ class CustomerNoteController extends Controller
         $parsedData["note"] = $notes;
 
         return view('customer.pests', ['data' => $parsedData]);
-
     }
 
     private function submitToAI(string $notes): array

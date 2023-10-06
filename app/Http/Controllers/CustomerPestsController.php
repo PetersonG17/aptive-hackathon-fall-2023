@@ -12,6 +12,7 @@ class CustomerPestsController extends Controller
         $locations = $request->input('locations');
 
         // TODO: Send data to MySQL DB
+        
         // TODO: Send data to influxDB
 
         return view('customer.confirm');
