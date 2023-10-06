@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Customer Pests</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -17,6 +17,19 @@
 
     </head>
         <!-- TODO display the customer pests -->
-        @php dd($data); @endphp
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Looks like you are having trouble with these issues...</h5>
+                <p class="card-text">Did we get it right? Please confirm so that we can take care of the issues to your satisfaction.</p>
+                <form action="{{ route('pests.submit') }}" method="POST">
+                    @csrf <!-- {{ csrf_field() }} -->
+                    <div class="form-group">
+                        <textarea class="form-control" name="notes" id="notes" placeholder="I have been having issues with ants in my kitchen. etc..." rows="10" required>{{ old('notes') }}</textarea>
+                    </div>
+                    <div class="p-1"></div>
+                    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                </form>
+            </div>
+        </div>
     </body>
 </html>

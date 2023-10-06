@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::post('/customer-notes', [CustomerNoteController::class, 'submit'])->name('note.submit');
+Route::post('/customer-pests', [CustomerPestsController::class, 'submit'])->name('pests.submit');
