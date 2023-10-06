@@ -27,7 +27,7 @@ class Customer extends Model
     /**
      * Get the comments for the blog post.
      */
-    public function comments(): HasMany
+    public function appointments(): HasMany
     {
         return $this->hasMany(Appointment::class);
     }

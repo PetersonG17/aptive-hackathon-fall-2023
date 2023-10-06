@@ -23,6 +23,7 @@
                 <p class="card-text">Please tell us what pests you're seeing and where our service pros should look for them.</p>
                 <form action="{{ route('pests.submit') }}" method="POST">
                     @csrf <!-- {{ csrf_field() }} -->
+                    <input type="hidden" name="notes" value="{{$data['notes']}}">
                     @foreach ( $data['pests'] as $pest )
                         <div class="row mb-1">
                             <div class="col">
