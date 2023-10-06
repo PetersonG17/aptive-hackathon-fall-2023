@@ -31,12 +31,13 @@ class CustomerPestsController extends Controller
     private function parseJohnsNonesenseIntoUsableArray(Request $request): array
     {
         $usableArray = [];
-
-        $row = $this->parseSingleNonsenseRow($request, 0);
+        $rowNumber = 0;
+        $row = $this->parseSingleNonsenseRow($request, $rowNumber);
 
         while($row !== null) {
             $usableArray[] = $row;
-            $row = $this->parseSingleNonsenseRow($request, 0);
+            $rowNumber++;
+            $row = $this->parseSingleNonsenseRow($request, $rowNumber);
         }
 
         return $usableArray;
