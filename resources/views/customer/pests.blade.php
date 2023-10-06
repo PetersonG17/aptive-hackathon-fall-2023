@@ -16,14 +16,15 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     </head>
+    <body class="antialiased d-flex align-items-center justify-content-center">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Can you tell us more about it?</h5>
                 <p class="card-text">Please tell us what pests you're seeing and where our service pros should look for them.</p>
                 <form action="{{ route('pests.submit') }}" method="POST">
                     @csrf <!-- {{ csrf_field() }} -->
-                    @foreach ( $pests as $pest )
-                        <div class="row">
+                    @foreach ( $data['pests'] as $pest )
+                        <div class="row mb-1">
                             <div class="col">
                                 <input type="text" class="form-control" name="pests[]" placeholder="Pest" value="{{ $pest['pest'] }}">
                             </div>

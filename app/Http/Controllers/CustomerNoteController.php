@@ -15,14 +15,12 @@ class CustomerNoteController extends Controller
         // Placeholder of what I am expecting
         $parsedData = [
             "pests" => [
-                [
-                    ["pest" => "wasp", "location" => "eves"],
-                    ["pest" => "ants", "location" => "backyard"]
-                ]
+                ["pest" => "wasp", "location" => "eves"],
+                ["pest" => "ants", "location" => "backyard"]
             ],
             "note" => "I have a wasp nest in my eves and a terrible ant problem in my backyard"
         ];
 
-        return view('customer.pests', $parsedData);
+        return view('customer.pests', ['data' => $parsedData]);
     }
 }
