@@ -16,7 +16,7 @@ class CustomerProfileController extends Controller
 
         $customer  = Customer::find(1); // Hard coded customer ID of 1
 
-        $appointments = Appointment::where('customer_id', 1)->get();
+        $appointments = Appointment::where('customer_id', 1)->orderBy('scheduled_for', 'DESC')->get();
 
         // summarize all the pest information for the profile
         $pestCounts = [];
