@@ -21,10 +21,10 @@
             <div class="card-body">
                 <h5 class="card-title">You are having problems with these pests in these locations. Is this correct?</h5>
                 <p class="card-text">Please confirm that we have summarized your pest issues correctly.</p>
-                <form action="{{ route('pests.submit') }}" method="POST">
+                <form action="{{ route('pests.submit') }}" method="POST" id='pest-form'>
                     @csrf <!-- {{ csrf_field() }} -->
                     @foreach ( $data['pests'] as $pest )
-                        <div class="row mb-1">
+                        <div class="row mb-1" @if($loop->first) id='row-template' @elseif($loop->last) id='last-row' @endif data-row-index="{{$loop->index}}">
                             <div class="col">
                                 <div class="input-group mb-3">
                                     <div class="input-group-append">
@@ -53,16 +53,52 @@
                             </div>
                         </div>
                     @endforeach
+                    <div class="row">
+                        <div class="col-12 d-flex align-items-center justify-content-start">
+                            <button type="button" id='add-row-button' class="btn btn-light"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
                     <div class="p-1"></div>
-                    <button type="submit" class="btn btn-primary mb-2">Confirm</button>
+                    <button type="submit" class="btn btn-primary mb-2 mt-1">Confirm</button>
                 </form>
             </div>
         </div>
     </body>
 
     <script>
+        // Set listener on the plus button
+        document.getElementById("add-row-button").addEventListener("click", addRow);
 
-        // Determin if the checkbox should be true or false
+        function addRow() {
+            var form = document.getElementById('pest-form');
+            var rowTemplate = document.getElementById('row-template').cloneNode(true);
+
+            var lastRow = document.getElementById('last-row');
+            var lastIndex = lastRow.getAttribute('data-row-index');
+
+            // Swap the last row to the new row
+            lastRow.removeAttribute('id')
+            rowTemplate.setAttribute('id', 'last-row');
+
+            // Adjust the input names on the new row to be the next index on the iteration
+            var pestInput = rowTemplate.querySelector('input[name="pest-0"]');
+            var locationInput = rowTemplate.querySelector('input[name="location-0"]');
+            var checkboxInput = rowTemplate.querySelector('input[name="recurring-0"]');
+
+            var nextIndex = parseInt(lastIndex) + 1;
+            pestInput.setAttribute('name', 'pest-' + nextIndex);
+            pestInput.setAttribute('value', "");
+            locationInput.setAttribute('name', 'location-' + nextIndex);
+            locationInput.setAttribute('value', "");
+            checkboxInput.setAttribute('name', 'checkbox-' + nextIndex);
+            checkboxInput.setAttribute('value', "");
+
+            // And swap the adjust the data row index for the new row
+            rowTemplate.setAttribute('data-row-index', nextIndex);
+
+            // Insert the new row at the end of the form
+            lastRow.after(rowTemplate);
+        }
 
     </script>
 </html>
