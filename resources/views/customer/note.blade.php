@@ -16,7 +16,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     </head>
-    <body class="antialiased d-flex align-items-center justify-content-center">
+    <body class="antialiased d-flex align-items-center justify-content-center vh-100">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Looks like you are having trouble with these issues...</h5>

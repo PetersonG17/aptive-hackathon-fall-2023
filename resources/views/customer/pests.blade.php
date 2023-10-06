@@ -16,11 +16,11 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     </head>
-    <body class="antialiased d-flex align-items-center justify-content-center">
+    <body class="antialiased d-flex align-items-center justify-content-center vh-100">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Can you tell us more about it?</h5>
-                <p class="card-text">Please tell us what pests you're seeing and where our service pros should look for them.</p>
+                <h5 class="card-title">You are having problems with these pests in these locations. Is this correct?</h5>
+                <p class="card-text">Please confirm that we have summarized your pest issues correctly.</p>
                 <form action="{{ route('pests.submit') }}" method="POST">
                     @csrf <!-- {{ csrf_field() }} -->
                     <input type="hidden" name="notes" value="{{$data['notes']}}">
@@ -29,7 +29,9 @@
                             <div class="col">
                                 <div class="input-group mb-3">
                                     <div class="input-group-append">
-                                        <span class="input-group-text">Pest</span>
+                                        <span class="input-group-text h-100">
+                                            <i class="fa-solid fa-bug"></i>
+                                        </span>
                                     </div>
                                     <input type="text" class="form-control" name="pests[]" placeholder="Pest" value="{{ $pest['name'] }}">
                                   </div>
@@ -37,7 +39,9 @@
                             <div class="col">
                                 <div class="input-group mb-3">
                                     <div class="input-group-append">
-                                        <span class="input-group-text">Location</span>
+                                        <span class="input-group-text h-100">
+                                            <i class="fa-solid fa-house"></i>
+                                        </span>
                                     </div>
                                     <input type="text" class="form-control" name="locations[]" placeholder="Location" value="{{ $pest['location'] }}">
                                 </div>
@@ -45,7 +49,7 @@
                         </div>
                     @endforeach
                     <div class="p-1"></div>
-                    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                    <button type="submit" class="btn btn-primary mb-2">Confirm</button>
                 </form>
             </div>
         </div>
