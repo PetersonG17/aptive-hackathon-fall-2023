@@ -23,11 +23,9 @@ class CustomerPestsController extends Controller
 
         $appointment->save();
 
-        dd($pestsAndLocations);
-        
-        // TODO: Send data to influxDB
-
-        return view('customer.confirm');
+        return view('customer.confirm', [
+            'pests' => $pestsAndLocations,
+        ]);
     }
 
     private function parseJohnsNonesenseIntoUsableArray(Request $request): array
