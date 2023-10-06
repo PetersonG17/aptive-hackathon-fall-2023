@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('customer_note');
+    return view('customer.note');
 });
 
 Route::post('/customer-notes', [CustomerNoteController::class, 'submit'])->name('note.submit');
