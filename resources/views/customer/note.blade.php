@@ -17,18 +17,22 @@
 
     </head>
     <body class="antialiased d-flex align-items-center justify-content-center vh-100">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Looks like you are having trouble with these issues...</h5>
-                <p class="card-text">Did we get it right? Please confirm so that we can take care of the issues to your satisfaction.</p>
-                <form action="{{ route('note.submit') }}" method="POST">
-                    @csrf <!-- {{ csrf_field() }} -->
-                    <div class="form-group">
-                        <textarea class="form-control" name="notes" id="notes" placeholder="I have been having issues with ants in my kitchen. etc..." rows="10" required>{{ old('notes') }}</textarea>
-                    </div>
-                    <div class="p-1"></div>
-                    <button type="submit" class="btn btn-primary mb-2">Submit</button>
-                </form>
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">What pests can we help you take care of today?</h5>
+                    <h6 class="card-subtitle text-muted">Please describe the pests and locations that we should target.</h6>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('note.submit') }}" method="POST">
+                        @csrf <!-- {{ csrf_field() }} -->
+                        <div class="form-group">
+                            <textarea class="form-control" name="notes" id="notes" placeholder="I have been having issues with ants in my kitchen. etc..." rows="10" required>{{ old('notes') }}</textarea>
+                        </div>
+                        <div class="p-1"></div>
+                        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                    </form>
+                </div>
             </div>
         </div>
     </body>
