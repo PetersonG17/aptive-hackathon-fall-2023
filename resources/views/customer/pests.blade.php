@@ -33,7 +33,7 @@
                                             <i class="fa-solid fa-bug"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" name="pests[]" placeholder="Pest" value="{{ $pest['name'] }}">
+                                    <input type="text" class="form-control" name="pest-{{$loop->index}}" placeholder="Pest" value="{{ $pest['name'] }}">
                                   </div>
                             </div>
                             <div class="col">
@@ -43,8 +43,14 @@
                                             <i class="fa-solid fa-house"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" name="locations[]" placeholder="Location" value="{{ $pest['location'] }}">
+                                    <input type="text" class="form-control" name="location-{{$loop->index}}" placeholder="Location" value="{{ $pest['location'] }}">
                                 </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="isRecurring">Is this a recurring issue?</label>
+                                    <input class="form-check-input" type="checkbox" name="recurring-{{$loop->index}}" id="isRecurring">
+                                  </div>
                             </div>
                         </div>
                     @endforeach
@@ -54,4 +60,10 @@
             </div>
         </div>
     </body>
+
+    <script>
+
+        // Determin if the checkbox should be true or false
+
+    </script>
 </html>
