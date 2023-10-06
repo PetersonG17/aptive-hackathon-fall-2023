@@ -28,7 +28,9 @@
                             <div class="col">
                                 <div class="input-group mb-3">
                                     <div class="input-group-append">
-                                        <span class="input-group-text">Pest</span>
+                                        <span class="input-group-text h-100">
+                                            <i class="fa-solid fa-bug"></i>
+                                        </span>
                                     </div>
                                     <input type="text" class="form-control" name="pests[]" placeholder="Pest" value="{{ $pest['name'] }}">
                                   </div>
@@ -36,7 +38,9 @@
                             <div class="col">
                                 <div class="input-group mb-3">
                                     <div class="input-group-append">
-                                        <span class="input-group-text">Location</span>
+                                        <span class="input-group-text h-100">
+                                            <i class="fa-solid fa-house"></i>
+                                        </span>
                                     </div>
                                     <input type="text" class="form-control" name="locations[]" placeholder="Location" value="{{ $pest['location'] }}">
                                 </div>
@@ -44,7 +48,7 @@
                         </div>
                     @endforeach
                     <div class="p-1"></div>
-                    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                    <button type="submit" class="btn btn-primary mb-2">Confirm</button>
                 </form>
             </div>
         </div>
