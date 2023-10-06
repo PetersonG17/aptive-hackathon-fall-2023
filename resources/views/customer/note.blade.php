@@ -19,8 +19,8 @@
     <body class="antialiased d-flex align-items-center justify-content-center">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Can you tell us more about it?</h5>
-                <p class="card-text">Please tell us what pests you're seeing and where our service pros should look for them.</p>
+                <h5 class="card-title">Looks like you are having trouble with these issues...</h5>
+                <p class="card-text">Did we get it right? Please confirm so that we can take care of the issues to your satisfaction.</p>
                 <form action="{{ route('note.submit') }}" method="POST">
                     @csrf <!-- {{ csrf_field() }} -->
                     <div class="form-group">

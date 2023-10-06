@@ -16,16 +16,22 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     </head>
-        <!-- TODO display the customer pests -->
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Looks like you are having trouble with these issues...</h5>
-                <p class="card-text">Did we get it right? Please confirm so that we can take care of the issues to your satisfaction.</p>
+                <h5 class="card-title">Can you tell us more about it?</h5>
+                <p class="card-text">Please tell us what pests you're seeing and where our service pros should look for them.</p>
                 <form action="{{ route('pests.submit') }}" method="POST">
                     @csrf <!-- {{ csrf_field() }} -->
-                    <div class="form-group">
-                        <textarea class="form-control" name="notes" id="notes" placeholder="I have been having issues with ants in my kitchen. etc..." rows="10" required>{{ old('notes') }}</textarea>
-                    </div>
+                    @foreach ( $pests as $pest )
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control" name="pests[]" placeholder="Pest" value="{{ $pest['pest'] }}">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" name="pests[]" placeholder="Location" value="{{ $pest['location'] }}">
+                            </div>
+                        </div>
+                    @endforeach
                     <div class="p-1"></div>
                     <button type="submit" class="btn btn-primary mb-2">Submit</button>
                 </form>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerPestsController;
 use App\Http\Controllers\CustomerNoteController;
 use Illuminate\Support\Facades\Route;
 
