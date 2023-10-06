@@ -8,11 +8,12 @@ class CustomerPestsController extends Controller
 {
     public function submit(Request $request)
     {
-        dd($request->all());
+        $pests = $request->input('pests');
+        $locations = $request->input('locations');
 
         // TODO: Send data to MySQL DB
         // TODO: Send data to influxDB
 
-        // TODO: View for confirmation for the customer include link to customer profile page
+        return view('customer.confirm');
     }
 }
