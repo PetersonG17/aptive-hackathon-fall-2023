@@ -8,32 +8,17 @@ volumes:
 
 services:
 
-    laravel-docker-nginx:
-        image: nginx:stable-alpine
-        container_name: laravel-docker-nginx
-        platform: linux/amd64
-        ports:
-            - "8080:80"
-        volumes:
-            - ./:/var/www/app
-            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-        depends_on:
-            - laravel-docker-php
-            - laravel-docker-mysql
-        networks:
-            - network
-
-    laravel-docker-mysql:
+    customer-notes-ai-mysql:
         image: mysql:8.0
-        container_name: laravel-docker-mysql
+        container_name: customer-notes-ai-mysql
         platform: linux/amd64
         restart: unless-stopped
         tty: true
         ports:
             - 3306:3306
         environment:
-            MYSQL_DATABASE: laravel-dockerdb
-            MYSQL_ROOT_PASSWORD: secret
+            MYSQL_DATABASE: $DB_DATABASE
+            MYSQL_ROOT_PASSWORD: $DB_PASSWORD
         command: "--log-bin-trust-function-creators=1"
         volumes:
             - mysql:/var/lib/mysql
@@ -42,21 +27,22 @@ services:
         cap_add:
             - SYS_NICE  # CAP_SYS_NICE
 
-    laravel-docker-php:
+    customer-notes-ai-web:
+        env_file:
+            - .env
         build:
             context: .
-            dockerfile: ./docker/php/Dockerfile
-        image: laravel-docker-php
+            dockerfile: ./Dockerfile
+        image: customer-notes-ai-web
         platform: linux/amd64
-        container_name: laravel-docker-php
+        container_name: customer-notes-ai-web
         tty: true
         working_dir: /var/www/app
         volumes:
-            - ./:/var/www/app
-        #command: /bin/sh -C "./entrypoint.dev.sh"
+            - ./src:/var/www/app
         depends_on:
-            - laravel-docker-mysql
-        expose:
-            - 9000
+            - customer-notes-ai-mysql
+        ports:
+            - 8080:80
         networks:
             - network

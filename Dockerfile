@@ -11,11 +11,15 @@ RUN apt-get update && apt-get install -y \
     zip \
     # Needed for php intl extension
     libicu-dev \
-    g++
-
+    g++ \
+    # NGINX web server
+    nginx
 
 # install php extensions
 RUN docker-php-ext-install pdo pdo_mysql pcntl intl zip
+
+# Copy nginx configuration
+COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Install composer
 RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -24,11 +28,16 @@ RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/
 WORKDIR /var/www/app/
 
 # Copy the source code
-COPY . .
+COPY ./src .
 
 # Copy the dependancies for composer and install
-COPY ./composer*.json .
 RUN composer install
 
-# Default command when server starts
-CMD ["php-fpm"]
+# Install NPM packages and complie web assets
+RUN npm install
+RUN npm run production
+
+EXPOSE 80
+
+# Execute the entrypoint script
+ENTRYPOINT ["./entrypoint.sh"]
