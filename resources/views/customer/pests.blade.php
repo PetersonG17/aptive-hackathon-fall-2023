@@ -50,7 +50,7 @@
                                                         <i class="fa-solid fa-bug"></i>
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control" name="pest-{{$loop->index}}" placeholder="Pest" value="{{ $pest['name'] }}" required>
+                                                <input type="text" class="form-control" name="pest-{{$loop->index}}" placeholder="Pest" value="{{ $pest['pest'] }}" required>
                                               </div>
                                         </div>
                                         <div class="col">
