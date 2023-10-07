@@ -5,12 +5,6 @@ on:
     branches:
       - main
 
-env:
-  AWS_REGION: AWS_REGION
-  ECR_REPOSITORY: ECR_REPOSITORY
-  ECS_SERVICE: ECS_SERVICE
-  ECS_CLUSTER: ECS_CLUSTER
-
 jobs:
   deploy:
     name: Deploy
@@ -24,9 +18,9 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
+          aws-access-key-id: ${AWS_ACCESS_KEY_ID}
+          aws-secret-access-key: ${AWS_SECRET_ACCESS_KEY}
+          aws-region: ${AWS_REGION}
 
       - name: Login to Amazon ECR
         id: login-ecr
@@ -38,11 +32,11 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: latest
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+          docker build -t ${ECR_REGISTRY}/${ECR_REPOSITORY}:latest .
+          docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:latest
+          echo "image=${ECR_REGISTRY}/${ECR_REPOSITORY}:latest" >> $GITHUB_OUTPUT
 
       - name: Force Redeployment of ECS Task
         run: |
-          aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --force-new-deployment
+          aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --force-new-deployment
 
