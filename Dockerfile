@@ -40,4 +40,4 @@ RUN npm run production
 EXPOSE 80
 
 # Execute the entrypoint script
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["sh","./entrypoint.sh"]
