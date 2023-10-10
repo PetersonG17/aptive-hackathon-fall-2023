@@ -41,5 +41,7 @@ RUN npm run production
 
 EXPOSE 80
 
+RUN chown -R www-data:www-data /var/www/app
+
 # Execute the entrypoint script
 ENTRYPOINT ["sh","./entrypoint.sh"]
