@@ -78,6 +78,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <button type="button" id='add-row-button' class="btn btn-light"><i class="fa-solid fa-plus"></i></button>
+                                        <button type="button" id='remove-row-button' class="btn btn-light"><i class="fa-solid fa-minus"></i></button>
                                     </div>
                                 </div>
                                 <div class="p-1"></div>
@@ -89,12 +90,29 @@
             </div>
         </div>
 
-
     </body>
 
     <script>
-        // Set listener on the plus button
+        // Set listener on the plus and minus buttons
         document.getElementById("add-row-button").addEventListener("click", addRow);
+        document.getElementById("remove-row-button").addEventListener("click", removeRow);
+
+        function removeRow() {
+            var form = document.getElementById('pest-form');
+            var lastRow = document.querySelector('[data-row-last="last"]');
+            var lastIndex = lastRow.getAttribute('data-row-index');
+
+            // Only remove rows if this is not the last row available
+            if (lastIndex != 0) {
+                // Set the last row data attribute to the previous row
+                var previousIndex = lastIndex - 1;
+                var previousRow = document.querySelector('[data-row-index="' + previousIndex + '"]')
+                previousRow.setAttribute('data-row-last', 'last'); // The new last row
+
+                // Remove the last row
+                lastRow.remove();
+            }
+        }
 
         function addRow() {
             var form = document.getElementById('pest-form');
