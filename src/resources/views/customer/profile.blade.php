@@ -18,8 +18,8 @@
 
     </head>
 
-    <body class="antialiased vh-100 d-flex align-items-center justify-content-center vh-100">
-        <div class="container">
+    <body class="antialiased d-flex align-items-center justify-content-center vh-100">
+        <div class="container h-75">
             <div class="card">
                 <div class="card-header">
                     <div class="row">
