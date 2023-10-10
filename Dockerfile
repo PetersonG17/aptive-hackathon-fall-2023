@@ -18,8 +18,10 @@ RUN apt-get update && apt-get install -y \
 # install php extensions
 RUN docker-php-ext-install pdo pdo_mysql pcntl intl zip
 
-# Copy nginx configuration
+# Configure NGINX
 COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+RUN rm /etc/nginx/sites-available/*
+RUN rm /etc/nginx/sites-enabled/*
 
 # Install composer
 RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
