@@ -42,7 +42,11 @@
                                 @csrf <!-- {{ csrf_field() }} -->
                                 <input type="hidden" name="notes" value="{{ $data['notes'] }}">
                                 @foreach ( $data['pests'] as $pest )
-                                    <div class="row mb-1" @if($loop->first) id='row-template' @elseif($loop->last) id='last-row' @endif data-row-index="{{$loop->index}}">
+                                    <div class="row mb-1"
+                                        @if($loop->first && $loop->last) data-row-template='template' data-row-last="last"
+                                        @elseif($loop->first) data-row-template='template'
+                                        @elseif($loop->last) data-row-last='last'
+                                        @endif data-row-index="{{$loop->index}}">
                                         <div class="col">
                                             <div class="input-group mb-3">
                                                 <div class="input-group-append">
@@ -94,14 +98,17 @@
 
         function addRow() {
             var form = document.getElementById('pest-form');
-            var rowTemplate = document.getElementById('row-template').cloneNode(true);
+            var rowTemplate = document.querySelector('[data-row-template="template"]').cloneNode(true);
 
-            var lastRow = document.getElementById('last-row');
+            var lastRow = document.querySelector('[data-row-last="last"]');
             var lastIndex = lastRow.getAttribute('data-row-index');
 
             // Swap the last row to the new row
-            lastRow.removeAttribute('id')
-            rowTemplate.setAttribute('id', 'last-row');
+            lastRow.removeAttribute('data-row-last')
+            rowTemplate.setAttribute('data-row-last', 'last');
+
+            // Remove the row template attribute from the row template element
+            rowTemplate.removeAttribute('data-row-template');
 
             // Adjust the input names on the new row to be the next index on the iteration
             var pestInput = rowTemplate.querySelector('input[name="pest-0"]');
